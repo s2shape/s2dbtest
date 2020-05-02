@@ -9,14 +9,17 @@ namespace S2DbTester
     {
         static void Main(string[] args)
         {
-            if(args.Length != 1)
+            string connectionString;
+            if(args.Length == 1)
             {
-                Console.WriteLine("Expecting one parameter with connection string");
-                return;
+                connectionString = args[0];
             }
-
-            var connectionString = args[0];
-
+            else
+            {
+                Console.WriteLine("Enter connection string:");
+                connectionString = Console.ReadLine();
+            }
+            
             Console.WriteLine("Starting Ado.NET connection test...");
             TestConnectionString(connectionString);
 
@@ -29,9 +32,10 @@ namespace S2DbTester
         public static void TestConnectionString(string connectionString)
         {
 
-            using SqlConnection conn = new SqlConnection(connectionString);
+            using SqlConnection conn = new SqlConnection();
             try
             {
+                conn.ConnectionString = connectionString;
                 conn.Open();
                 Console.WriteLine("Ado.NET connection test passed");
             }

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  s2dbtester:
+    image: registry.s2shape.com/s2dbtester
+    build:
+      context: .
+      dockerfile: ./Dockerfile
